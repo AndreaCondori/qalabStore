@@ -10,11 +10,7 @@ import java.time.Duration;
 
 public class CarritoPage {
     private WebDriver driver;
-
-
     private WebDriverWait wait;
-
-    // Localizadores
     private By precioUnitario = By.xpath("//*[@id=\"main\"]/div/div[1]/div/div[2]/ul/li/div/div[2]/div[2]/div[2]/span");
     private By precioTotalLocator = By.xpath("//*[@id=\"main\"]/div/div[2]/div[1]/div[1]/div[2]/div[2]/span[2]");
     private By obtenerTitulo = By.xpath("//div[1]/h1");
@@ -22,11 +18,9 @@ public class CarritoPage {
 
     public CarritoPage(WebDriver driver) {
         this.driver = driver;
-        // Definir el tiempo máximo de espera de 10 segundos
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Métodos para obtener los datos del carrito
 
     public double obtenerPrecioTotalCarrito() {
         WebElement precioElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(precioTotalLocator));
@@ -41,9 +35,9 @@ public class CarritoPage {
 
     public double obtenerCantidadCarrito() {
         WebElement cantidadElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(cantidadPedido));
-        return parsearPrecio(cantidadElemento.getText());
+        String cantidadTexto = cantidadElemento.getAttribute("value");
+        return parsearPrecio(cantidadTexto);
     }
-
 
     public String obtenerTituloCarrito() {
         return driver.findElement(obtenerTitulo).getText();

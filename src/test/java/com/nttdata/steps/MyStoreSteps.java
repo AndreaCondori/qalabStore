@@ -32,15 +32,19 @@ public class MyStoreSteps {
         paginaLogin.ingresarUsuario(usuario);
         paginaLogin.ingresarClave(clave);
         paginaLogin.hacerClicEnLogin();
+        if (!paginaLogin.estaAutenticado()) {
+            throw new AssertionError("Error: No se pudo autenticar con las credenciales proporcionadas.");
+        }
+
     }
 
     public boolean navegarACategoria(String categoria, String subcategoria) {
         try {
-            paginaInicio.moverCursorSobreMenuRopa(categoria, subcategoria);
-            return true; // Navegación exitosa
+            paginaInicio.navegarACategoriaYSubcategoria(categoria, subcategoria);
+            return true;
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
-            return false; // Falló la navegación
+            return false;
         }
     }
 

@@ -11,44 +11,31 @@ public class HomePage {
     private WebDriver driver;
     private WebDriverWait espera;
 
-    // Localizadores
-    private By localizadorCategoria = By.xpath("//li[@id='category-3']/a");
-    private By localizadorSubcategoria =  By.xpath("//li[@id='category-4']/a");
+    private By categoriaLocator = By.xpath("//a[contains(@href, 'clothes')]");
+    private By subcategoriaLocator; // Se asignará dinámicamente
 
-    // Constructor
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.espera = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // Métodos
-    public void moverCursorSobreMenuRopa(String categoria, String subcategoria) {
+    public void navegarACategoriaYSubcategoria(String categoria, String subcategoria) {
         Actions acciones = new Actions(driver);
+
         try {
+            categoriaLocator = By.xpath("//a[contains(@href, '" + categoria.toLowerCase() + "')]");
+            WebElement categoriaElemento = espera.until(ExpectedConditions.visibilityOfElementLocated(categoriaLocator));
 
+            acciones.moveToElement(categoriaElemento).perform();
 
-            WebElement elementoMenu = espera.until(ExpectedConditions.visibilityOfElementLocated(localizadorCategoria));
-            acciones.moveToElement(elementoMenu).perform();
+            subcategoriaLocator = By.xpath("//li[@class='category']//a[contains(text(), '" + subcategoria + "')]");
+            WebElement subcategoriaElemento = espera.until(ExpectedConditions.elementToBeClickable(subcategoriaLocator));
 
-            // Hacer clic en la subcategoría
-            WebElement elementoSubMenu = espera.until(ExpectedConditions.elementToBeClickable(localizadorSubcategoria));
-            elementoSubMenu.click();
+            subcategoriaElemento.click();
+
         } catch (TimeoutException e) {
-            throw new NoSuchElementException("No se encontró la categoría o subcategoría: " + categoria + " > " + subcategoria);
-        }
-    }
-
-
-
-
-    public boolean navegarACategoriaHombres() {
-        try {
-            // Navega directamente a la categoría "3" y subcategoría "4" para Hombres
-            moverCursorSobreMenuRopa("3", "4");
-            return true; // Navegación exitosa
-        } catch (NoSuchElementException e) {
-            System.out.println("Error al navegar a la categoría Hombres: " + e.getMessage());
-            return false; // Fallo en la navegación
+            throw new NoSuchElementException("No se encontró la categoría '" + categoria + "' o la subcategoría '" + subcategoria + "'");
         }
     }
 }

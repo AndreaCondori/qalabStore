@@ -39,7 +39,7 @@ public class MyStoreStepsDefinition {
 
     @And("agrego {int} unidades del primer producto al carrito")
     public void agregoUnidadesProducto(int cantidad) {
-        pasosMyStore.cantidadPedido= pasosMyStore.cantidadPedido;
+        pasosMyStore.cantidadPedido = cantidad;
         pasosMyStore.seleccionarPrimerProducto();
         pasosMyStore.agregarProductoAlCarrito(cantidad);
     }
@@ -51,23 +51,14 @@ public class MyStoreStepsDefinition {
 
     @And("valido en el popup que el monto total sea calculado correctamente")
     public void validoMontoTotalPopup() {
+        int cantidad = pasosMyStore.cantidadPedido;
         double precioUnitario = pasosMyStore.obtenerPrecioUnitarioProducto();
         double precioTotalPopup = pasosMyStore.obtenerPrecioTotalPopup();
-        int cantidad = 2; // Cantidad fija según el Gherkin
 
         double precioEsperado = precioUnitario * cantidad;
 
-        // Log para verificar los valores
-        System.out.println("Precio Unitario: " + precioUnitario);
-        System.out.println("Cantidad: " + cantidad);
-        System.out.println("Precio Total Esperado: " + precioEsperado);
-        System.out.println("Precio Total Popup: " + precioTotalPopup);
-
         Assert.assertEquals("El precio total en el popup no es correcto.", precioEsperado, precioTotalPopup, 0.01);
     }
-
-
-
 
     @When("finalizo la compra")
     public void finalizoLaCompra() {
