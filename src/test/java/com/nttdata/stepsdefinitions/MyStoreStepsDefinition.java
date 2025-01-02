@@ -36,7 +36,6 @@ public class MyStoreStepsDefinition {
         }
     }
 
-
     @And("agrego {int} unidades del primer producto al carrito")
     public void agregoUnidadesProducto(int cantidad) {
         pasosMyStore.cantidadPedido = cantidad;
@@ -72,6 +71,7 @@ public class MyStoreStepsDefinition {
 
     @And("vuelvo a validar el calculo de precios en el carrito")
     public void validoPreciosCarrito() {
+
         Assert.assertTrue("",pasosMyStore.validarCantidadPedidovsCantidadCarrito());
     }
 }

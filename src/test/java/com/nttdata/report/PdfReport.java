@@ -7,6 +7,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 import java.io.FileNotFoundException;
 
+import static com.itextpdf.kernel.pdf.PdfName.Document;
+
 public class PdfReport {
     public void generarReporte(String filePath, String contenido) {
         try {

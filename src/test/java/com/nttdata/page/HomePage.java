@@ -9,15 +9,14 @@ import java.time.Duration;
 
 public class HomePage {
     private WebDriver driver;
-    private WebDriverWait espera;
+    private WebDriverWait wait;
 
     private By categoriaLocator = By.xpath("//a[contains(@href, 'clothes')]");
-    private By subcategoriaLocator; // Se asignará dinámicamente
-
+    private By subcategoriaLocator;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.espera = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public void navegarACategoriaYSubcategoria(String categoria, String subcategoria) {
@@ -25,12 +24,12 @@ public class HomePage {
 
         try {
             categoriaLocator = By.xpath("//a[contains(@href, '" + categoria.toLowerCase() + "')]");
-            WebElement categoriaElemento = espera.until(ExpectedConditions.visibilityOfElementLocated(categoriaLocator));
+            WebElement categoriaElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(categoriaLocator));
 
             acciones.moveToElement(categoriaElemento).perform();
 
             subcategoriaLocator = By.xpath("//li[@class='category']//a[contains(text(), '" + subcategoria + "')]");
-            WebElement subcategoriaElemento = espera.until(ExpectedConditions.elementToBeClickable(subcategoriaLocator));
+            WebElement subcategoriaElemento = wait.until(ExpectedConditions.elementToBeClickable(subcategoriaLocator));
 
             subcategoriaElemento.click();
 

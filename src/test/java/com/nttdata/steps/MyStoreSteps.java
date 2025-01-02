@@ -26,7 +26,6 @@ public class MyStoreSteps {
         this.paginaDetalleProducto = new ProductDetailPage(driver);
         this.paginaCarrito = new CarritoPage(driver);
     }
-
     public void iniciarSesion(String usuario, String clave) {
         paginaLogin.IniciarSesion();
         paginaLogin.ingresarUsuario(usuario);
@@ -37,8 +36,7 @@ public class MyStoreSteps {
         }
 
     }
-
-    public boolean navegarACategoria(String categoria, String subcategoria) {
+    public boolean navegarACategoria(String... categoria) {
         try {
             paginaInicio.navegarACategoriaYSubcategoria(categoria, subcategoria);
             return true;
@@ -47,7 +45,6 @@ public class MyStoreSteps {
             return false;
         }
     }
-
     public void seleccionarPrimerProducto() {
         paginaHombres.hacerClicEnPrimerProducto();
     }
@@ -61,9 +58,6 @@ public class MyStoreSteps {
         return paginaDetalleProducto.obtenerMensajeConfirmacionPopup();
     }
 
-    public double obtenerPrecioUnitarioCarrito() {
-        return paginaCarrito.obtenerPrecioUnitarioCarrito();
-    }
     public double obtenerPrecioUnitarioProducto() {
         return paginaDetalleProducto.obtenerPrecioUnitario();
     }
@@ -72,10 +66,6 @@ public class MyStoreSteps {
         return paginaDetalleProducto.obtenerPrecioTotalPopup();
     }
 
-    public double obtenerPrecioTotalCarrito() {
-
-        return paginaCarrito.obtenerPrecioTotalCarrito();
-    }
 
     public void finalizarCompra() {
         paginaDetalleProducto.hacerClicEnFinalizarCompra();
@@ -92,19 +82,7 @@ public class MyStoreSteps {
                 mensajeConfirmacion.contains("Producto añadido correctamente a su carrito de compra"));
     }
 
-    public void validarPrecioTotalCarrito(double precioUnitario, int cantidad) {
-        double precioEsperado = precioUnitario * cantidad;
-        double precioCarrito = obtenerPrecioTotalCarrito();
-        Assert.assertEquals("El precio total en el carrito no coincide.", precioEsperado, precioCarrito, 0.01);
-    }
 
-    public void validarPrecioTotalPopup(int cantidad) {
-        double precioUnitario = obtenerPrecioUnitarioProducto();
-        double precioTotalPopup = obtenerPrecioTotalPopup();
-        double precioEsperado = precioUnitario * cantidad;
-
-        Assert.assertEquals("El precio total en el popup no coincide.", precioEsperado, precioTotalPopup, 0.01);
-    }
     public boolean validarCantidadPedidovsCantidadCarrito(){
         if(cantidadPedido==paginaCarrito.obtenerCantidadCarrito())
         {return true;}
@@ -112,13 +90,7 @@ public class MyStoreSteps {
             return false;
         }
     }
-    public boolean estaAutenticado() {
-        return paginaLogin.estaAutenticado();
-    }
 
-    public String obtenerMensajeError() {
-        return paginaLogin.obtenerMensajeError();
-    }
 
 
 
