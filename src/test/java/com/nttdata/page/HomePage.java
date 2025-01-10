@@ -11,7 +11,6 @@ public class HomePage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    private By categoriaLocator = By.xpath("//a[contains(@href, 'clothes')]");
     private By subcategoriaLocator;
 
     public HomePage(WebDriver driver) {
@@ -23,7 +22,7 @@ public class HomePage {
         Actions acciones = new Actions(driver);
 
         try {
-            categoriaLocator = By.xpath("//a[contains(@href, '" + categoria.toLowerCase() + "')]");
+            By categoriaLocator = By.xpath("//a[contains(@href, '" + categoria.toLowerCase() + "')]");
             WebElement categoriaElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(categoriaLocator));
 
             acciones.moveToElement(categoriaElemento).perform();
@@ -36,5 +35,14 @@ public class HomePage {
         } catch (TimeoutException e) {
             throw new NoSuchElementException("No se encontró la categoría '" + categoria + "' o la subcategoría '" + subcategoria + "'");
         }
+    }
+
+    public void navegaraCategoria(String categoriaXpa){
+
+           By categoriaLocator=By.xpath("//a[contains(normalize-space(text()), '" + categoriaXpa + "')]");
+            WebElement categoria = wait.until(ExpectedConditions.elementToBeClickable(categoriaLocator));
+
+            categoria.click();
+
     }
 }

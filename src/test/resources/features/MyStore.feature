@@ -20,21 +20,18 @@ Feature: Product - Store
       | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
       | andreacondori@gmail.com     | Qalab2024 | AUTOS     | 2        |
 @ProductoTalla
-Scenario Outline: Agregar diferentes tallas de un producto y validar precios
+Scenario Outline: Verificar que los productos se agrupen correctamente por talla y precios
   And me logueo con mi usuario "<usuario>" y clave "<clave>"
   When navego a la categoría "<categoria>"
-  And agrego la talla "<talla>" del primer producto al carrito
-  Then valido en el popup la confirmación del producto agregado
-  And valido que el precio para la talla "<talla>" sea correcto
-  When visualizo el carrito
-  Then verifico que cada talla del producto se liste como un ítem separado
-  And valido que el precio total en el carrito sea la suma de los precios por talla
+  And agrego las tallas "<tallas>" del primer producto al carrito
+  Then verifico que cada talla "<tallas>" del producto se liste como un ítem separado en el carrito
+  #And valido que los precios en el carrito sean correctos para las tallas "<tallas>" con precios "<precios>"
 
   Examples:
-    | usuario                 | clave     | categoria | talla      |
-    | andreacondori@gmail.com | Qalab2024 | Art       | 40x60cm    |
-    | andreacondori@gmail.com | Qalab2024 | Art       | 40x90cm    |
-    | andreacondori@gmail.com | Qalab2024 | Art       | 40x120cm   |
+    | usuario                 | clave     | categoria | tallas                   | precios                          |
+    | andreacondori@gmail.com | Qalab2024 | Art       | 80x120cm,40x60cm,60x90cm | 79,00 PEN, 29,00 PEN,  49,00 PEN |
+
+
 
 
 

@@ -36,7 +36,7 @@ public class MyStoreSteps {
         }
 
     }
-    public boolean navegarACategoria(String... categoria) {
+    public boolean navegarACategoria(String categoria,String subcategoria) {
         try {
             paginaInicio.navegarACategoriaYSubcategoria(categoria, subcategoria);
             return true;

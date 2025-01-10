@@ -1,39 +1,42 @@
 package com.nttdata.stepsdefinitions;
 
+import com.nttdata.core.DriverManager;
+import com.nttdata.steps.HomeStep;
+import com.nttdata.steps.MyStoreSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 
 public class ProductStepsDefinition {
 
-    @Given("")
-    public void asas(){
-
+        HomeStep homeStep;
+        WebDriver driver;
+        MyStoreSteps myStoreSteps;
+    public ProductStepsDefinition() {
+        this.driver = DriverManager.getDriver();
+        homeStep = new HomeStep(driver);
+        myStoreSteps= new MyStoreSteps(driver);
     }
-
     @When("navego a la categoría {string}")
-    public void navegoALaCategoria(String arg0, String arg1) {
-
+    public void navegoALaCategoria(String categoria) {
+        homeStep.nagegarCategoria(categoria);
     }
 
-    @And("agrego la talla {string} del primer producto al carrito")
-    public void agregoLaTallaDelPrimerProductoAlCarrito(String arg0, String arg1) {
+    @And("agrego las tallas {string} del primer producto al carrito")
+    public void agregoLasTallasDelPrimerProductoAlCarrito(String talla) {
+        homeStep.seleccionarPrimerProducto();
+        homeStep.agregarProductoTalla(talla);
     }
 
-    @And("valido que el precio para la talla {string} sea correcto")
-    public void validoQueElPrecioParaLaTallaSeaCorrecto(String arg0, String arg1) {
+    @Then("verifico que cada talla {string} del producto se liste como un ítem separado en el carrito")
+    public void verificoQueCadaTallaDelProductoSeListeComoUnItemSeparadoEnElCarrito(String tallasItem) {
+       homeStep.verificarTallaItemsCart(tallasItem);
     }
 
-    @When("visualizo el carrito")
-    public void visualizoElCarrito() {
-    }
-
-    @Then("verifico que cada talla del producto se liste como un ítem separado")
-    public void verificoQueCadaTallaDelProductoSeListeComoUnItemSeparado() {
-    }
-
-    @And("valido que el precio total en el carrito sea la suma de los precios por talla")
-    public void validoQueElPrecioTotalEnElCarritoSeaLaSumaDeLosPreciosPorTalla() {
+    @And("valido que los precios en el carrito sean correctos para las tallas {string} con precios {string}")
+    public void validoQueLosPreciosEnElCarritoSeanCorrectosParaLasTallasConPrecios(String tallas, String precios) {
+        homeStep.verificarPrecioTalla(tallas, precios);
     }
 }
