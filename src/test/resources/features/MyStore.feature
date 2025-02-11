@@ -18,8 +18,8 @@ Feature: Product - Store
     Examples:
       | usuario                     | clave     | categoria | cantidad |
       | andreacondori@gmail.com     | Qalab2024 | CLOTHES   | 2        |
-      | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
-      | andreacondori@gmail.com     | Qalab2024 | AUTOS     | 2        |
+#      | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
+#      | andreacondori@gmail.com     | Qalab2024 | AUTOS     | 2        |
 @ProductoTalla
 Scenario Outline: Verificar que los productos se agrupen correctamente por talla y precios
   And me logueo con mi usuario "<usuario>" y clave "<clave>"

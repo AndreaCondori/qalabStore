@@ -9,18 +9,23 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
+import static com.nttdata.core.DriverManager.getDriver;
+import static com.nttdata.core.DriverManager.screenShot;
+
 public class MyStoreStepsDefinition {
     private WebDriver driver;
     private MyStoreSteps pasosMyStore;
 
     public MyStoreStepsDefinition() {
-        driver = DriverManager.getDriver();
+        this.driver = getDriver();
         pasosMyStore = new MyStoreSteps(driver);
     }
 
     @Given("estoy en la página de la tienda")
     public void estoyEnLaPaginaDeLaTienda() {
+
         driver.get("https://qalab.bensg.com/store/login");
+        screenShot();
     }
 
     @And("me logueo con mi usuario {string} y clave {string}")
