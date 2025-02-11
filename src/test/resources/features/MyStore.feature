@@ -1,3 +1,4 @@
+@All
 @MyStore
 
 Feature: Product - Store
