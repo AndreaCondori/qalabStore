@@ -8,8 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -26,17 +25,12 @@ public class DriverManager {
 
     @Before(order = 0)
     public void setUp(){
-        // Usar WebDriverManager para gestionar automáticamente el geckodriver
-        WebDriverManager.firefoxdriver().setup();  // Esto descarga y configura automáticamente el geckodriver
+        WebDriverManager.chromedriver().setup();
 
-        // Opciones para Firefox
-        FirefoxOptions options = new FirefoxOptions();
-        options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe"); // Si es necesario especificar la ubicación de Firefox
-
-        // Crear el driver de Firefox con las opciones configuradas
-        driver = new FirefoxDriver(options);
-        driver.manage().window().maximize();  // Maximiza la ventana del navegador
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));  // Configura la espera explícita
+        ChromeOptions options = new ChromeOptions();
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         //Se ejecutará Automáticamente
 //        System.setProperty("webdriver.gecko.driver", "C:\\Users\\andre\\Documents\\Drivers\\geckodriver-v0.34.0-win32\\geckodriver.exe");
 //        FirefoxOptions options = new FirefoxOptions();
