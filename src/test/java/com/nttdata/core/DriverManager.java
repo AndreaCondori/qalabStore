@@ -1,5 +1,4 @@
 package com.nttdata.core;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
