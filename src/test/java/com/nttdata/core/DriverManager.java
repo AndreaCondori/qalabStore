@@ -37,7 +37,12 @@ public class DriverManager {
             options.setBinary("/usr/bin/firefox");
         }
 
-
+        // Configuración de ejecución en modo headless
+        options.addArguments("--headless"); // Ejecutar sin interfaz gráfica
+        options.addArguments("--disable-gpu"); // Evitar problemas gráficos
+        options.addArguments("--window-size=1920,1080"); // Definir tamaño de pantalla
+        options.addArguments("--no-sandbox"); // Recomendado para entornos Linux sin GUI
+        options.addArguments("--disable-dev-shm-usage"); // Evita errores de memoria en contenedores
         // System.setProperty("webdriver.http.factory", "jdk-http-client");
         //   System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         //  System.setProperty("")
