@@ -77,6 +77,12 @@
             <version>7.2.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.3</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Proyecto CON CUCUMBER-->
 
     </dependencies>
