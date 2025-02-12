@@ -26,18 +26,16 @@ public class DriverManager {
     @Before(order = 0)
     public void setUp(){
         //Se ejecutará Automáticamente
-//        System.setProperty("webdriver.gecko.driver", "C:\\Users\\andre\\Documents\\Drivers\\geckodriver-v0.34.0-win32\\geckodriver.exe");
-//        FirefoxOptions options = new FirefoxOptions();
-//        options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-//        // System.setProperty("webdriver.http.factory", "jdk-http-client");
-//        //   System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
-//        //  System.setProperty("")
-//
-//        driver = new FirefoxDriver(options);
-//        driver.manage().window().maximize();
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\andre\\Documents\\Drivers\\geckodriver-v0.34.0-win32\\geckodriver.exe");
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+        // System.setProperty("webdriver.http.factory", "jdk-http-client");
+        //   System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+        //  System.setProperty("")
+
+        driver = new FirefoxDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
     @Before(order = 1)
     public void setScenario(Scenario scenario){

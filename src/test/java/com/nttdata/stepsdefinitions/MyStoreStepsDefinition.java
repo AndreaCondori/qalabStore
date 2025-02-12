@@ -23,7 +23,8 @@ public class MyStoreStepsDefinition {
 
     @Given("estoy en la página de la tienda")
     public void estoyEnLaPaginaDeLaTienda() {
-
+        this.driver = getDriver();
+        pasosMyStore = new MyStoreSteps(driver);
         driver.get("https://qalab.bensg.com/store/login");
         screenShot();
     }
