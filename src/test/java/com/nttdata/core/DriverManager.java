@@ -25,7 +25,13 @@ public class DriverManager {
     @Before(order = 0)
     public void setUp(){
         //Se ejecutará Automáticamente
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\andre\\Documents\\Drivers\\geckodriver-v0.34.0-win32\\geckodriver.exe");
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            System.setProperty("webdriver.gecko.driver", "C:\\Users\\andre\\Documents\\Drivers\\geckodriver-v0.34.0-win32\\geckodriver.exe");
+        } else {
+            System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
+        }
+
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
         // System.setProperty("webdriver.http.factory", "jdk-http-client");
