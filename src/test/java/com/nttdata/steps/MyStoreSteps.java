@@ -8,9 +8,15 @@ import org.openqa.selenium.WebDriver;
 
 import com.nttdata.page.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MyStoreSteps {
     private WebDriver driver;
+
+    private WebDriverWait wait;
     private LoginPage paginaLogin;
     private HomePage paginaInicio;
     private StoreMenPage paginaHombres;
@@ -25,6 +31,7 @@ public class MyStoreSteps {
         this.paginaHombres = new StoreMenPage(driver);
         this.paginaDetalleProducto = new ProductDetailPage(driver);
         this.paginaCarrito = new CarritoPage(driver);
+        this.wait= new WebDriverWait(driver, Duration.ofSeconds(10));
     }
     public void iniciarSesion(String usuario, String clave) {
         paginaLogin.IniciarSesion();
@@ -54,10 +61,6 @@ public class MyStoreSteps {
         paginaDetalleProducto.hacerClicEnAgregarAlCarrito();
     }
 
-    public String obtenerMensajeConfirmacionPopup() {
-        return paginaDetalleProducto.obtenerMensajeConfirmacionPopup();
-    }
-
     public double obtenerPrecioUnitarioProducto() {
         return paginaDetalleProducto.obtenerPrecioUnitario();
     }
@@ -77,7 +80,8 @@ public class MyStoreSteps {
     }
 
     public void validarConfirmacionPopup() {
-        String mensajeConfirmacion = obtenerMensajeConfirmacionPopup();
+        String mensajeConfirmacion = paginaDetalleProducto.obtenerMensajeConfirmacionPopup();
+
         Assert.assertTrue("El mensaje de confirmación no es correcto.",
                 mensajeConfirmacion.contains("Producto añadido correctamente a su carrito de compra"));
     }
