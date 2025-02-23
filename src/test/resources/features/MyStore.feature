@@ -1,11 +1,10 @@
-@All
-@MyStore
-
 Feature: Product - Store
+
   Background:
     Given estoy en la página de la tienda
 
-  Scenario Outline: Validación del precio de un producto y la autenticación
+@MyStore @Automated
+  Scenario Outline: Validación del precio de un producto y autenticación
     And me logueo con mi usuario "<usuario>" y clave "<clave>"
     When navego a la categoria "<categoria>" y subcategoria "Men"
     And agrego <cantidad> unidades del primer producto al carrito
@@ -18,22 +17,15 @@ Feature: Product - Store
     Examples:
       | usuario                     | clave     | categoria | cantidad |
       | andreacondori@gmail.com     | Qalab2024 | CLOTHES   | 2        |
-#      | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
-#      | andreacondori@gmail.com     | Qalab2024 | AUTOS     | 2        |
-@ProductoTalla
-Scenario Outline: Verificar que los productos se agrupen correctamente por talla y precios
-  And me logueo con mi usuario "<usuario>" y clave "<clave>"
-  When navego a la categoría "<categoria>"
-  And agrego las tallas "<tallas>" del primer producto al carrito
-  Then verifico que cada talla "<tallas>" del producto se liste como un ítem separado en el carrito
-  #And valido que los precios en el carrito sean correctos para las tallas "<tallas>" con precios "<precios>"
+      | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
 
-  Examples:
-    | usuario                 | clave     | categoria | tallas                   | precios                          |
-    | andreacondori@gmail.com | Qalab2024 | Art       | 80x120cm,40x60cm,60x90cm | 79,00 PEN, 29,00 PEN,  49,00 PEN |
+@ProductoTalla @Manual
+  Scenario Outline: Verificar que los productos se agrupen correctamente por talla y precios
+    And me logueo con mi usuario "<usuario>" y clave "<clave>"
+    When navego a la categoría "<categoria>"
+    And agrego las tallas "<tallas>" del primer producto al carrito
+    Then verifico que cada talla "<tallas>" del producto se liste como un ítem separado en el carrito
 
-
-
-
-
-
+    Examples:
+      | usuario                 | clave     | categoria | tallas                   | precios                          |
+      | andreacondori@gmail.com | Qalab2024 | Art       | 80x120cm,40x60cm,60x90cm | 79,00 PEN, 29,00 PEN, 49,00 PEN    |

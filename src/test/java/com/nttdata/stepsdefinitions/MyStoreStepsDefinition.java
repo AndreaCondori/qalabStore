@@ -26,7 +26,6 @@ public class MyStoreStepsDefinition {
         this.driver = getDriver();
         pasosMyStore = new MyStoreSteps(driver);
         driver.get("https://qalab.bensg.com/store/login");
-        screenShot();
     }
 
     @And("me logueo con mi usuario {string} y clave {string}")
@@ -40,6 +39,8 @@ public class MyStoreStepsDefinition {
         if (!resultado) {
             Assert.fail("La categoría o subcategoría no existe: " + categoria + " > " + subcategoria);
         }
+
+
     }
 
     @And("agrego {int} unidades del primer producto al carrito")
@@ -52,6 +53,7 @@ public class MyStoreStepsDefinition {
     @Then("valido en el popup la confirmación del producto agregado")
     public void validoConfirmacionProducto() {
         pasosMyStore.validarConfirmacionPopup();
+
     }
 
     @And("valido en el popup que el monto total sea calculado correctamente")
@@ -63,6 +65,8 @@ public class MyStoreStepsDefinition {
         double precioEsperado = precioUnitario * cantidad;
 
         Assert.assertEquals("El precio total en el popup no es correcto.", precioEsperado, precioTotalPopup, 0.01);
+
+
     }
 
     @When("finalizo la compra")
@@ -73,11 +77,14 @@ public class MyStoreStepsDefinition {
     @Then("valido el titulo de la pagina del carrito")
     public void validoTituloPaginaCarrito() {
         pasosMyStore.validarTituloCarrito();
+        screenShot();
+
     }
 
     @And("vuelvo a validar el calculo de precios en el carrito")
     public void validoPreciosCarrito() {
 
         Assert.assertTrue("",pasosMyStore.validarCantidadPedidovsCantidadCarrito());
+
     }
 }

@@ -1,6 +1,7 @@
 package com.nttdata.core;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -58,6 +59,9 @@ public class DriverManager {
 
     @After
     public void quitDriver(){
+        if(scenario.isFailed()){
+            screenShot();
+        }
         driver.quit();
     }
 
@@ -65,4 +69,10 @@ public class DriverManager {
         byte[] evidencia = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(evidencia, "image/png", "evidencias");
     }
+//    @AfterStep
+//    public void afterStep(Scenario scenario) {
+//        byte[] evidencia = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//        scenario.attach(evidencia, "image/png", "Evidencia del paso");
+//    }
+
 }
