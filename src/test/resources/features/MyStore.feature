@@ -3,7 +3,7 @@ Feature: Product - Store
   Background:
     Given estoy en la página de la tienda
 
-@MyStore @Automated
+  @id:2@regression
   Scenario Outline: Validación del precio de un producto y autenticación
     And me logueo con mi usuario "<usuario>" y clave "<clave>"
     When navego a la categoria "<categoria>" y subcategoria "Men"
@@ -19,7 +19,7 @@ Feature: Product - Store
       | andreacondori@gmail.com     | Qalab2024 | CLOTHES   | 2        |
       | usuario_incorrecto@test.com | Qalab2024 | CLOTHES   | 2        |
 
-@ProductoTalla @Manual
+  @id:2@regression
   Scenario Outline: Verificar que los productos se agrupen correctamente por talla y precios
     And me logueo con mi usuario "<usuario>" y clave "<clave>"
     When navego a la categoría "<categoria>"

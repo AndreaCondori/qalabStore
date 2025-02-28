@@ -81,7 +81,7 @@ public class MyStoreSteps {
 
     public void validarConfirmacionPopup() {
         String mensajeConfirmacion = paginaDetalleProducto.obtenerMensajeConfirmacionPopup();
-
+        System.out.printf(mensajeConfirmacion);
         Assert.assertTrue("El mensaje de confirmación no es correcto.",
                 mensajeConfirmacion.contains("Producto añadido correctamente a su carrito de compra"));
     }
