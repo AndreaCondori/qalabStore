@@ -3,7 +3,7 @@ Feature: Product - Store
   Background:
     Given estoy en la página de la tienda
 
-  @id:2@regression
+  @id:1@regression
   Scenario Outline: Validación del precio de un producto y autenticación
     And me logueo con mi usuario "<usuario>" y clave "<clave>"
     When navego a la categoria "<categoria>" y subcategoria "Men"
